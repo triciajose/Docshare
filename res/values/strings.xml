@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Docshare</string>
+    <string name="action_settings">Settings</string>
+    <string name="button_sync">Sync</string>
+    <string name="edit_pass">Folder password</string>
+    <string name="button_folder">Add Folder</string>
+    <string name="title_activity_get_document">GetDocumentActivity</string>
+    <string name="title_activity_add_folder">AddFolderActivity</string>
+    <string name="title_activity_get_folder">GetFolderActivity</string>
+    <string name="hello_world">Hello world!</string>
+
+</resources>
