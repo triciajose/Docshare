@@ -12,24 +12,19 @@
         android:id="@+id/edit_pass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="29dp"
-        android:layout_marginTop="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="111dp"
         android:ems="10"
-        android:inputType="textPassword"
-         android:text="@string/edit_pass" >
-
-        <requestFocus />
-    </EditText>
+        android:hint="@string/edit_pass"
+        android:inputType="textPassword" />
 
     <Button
         android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editText1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="35dp"
+        android:layout_centerVertical="true"
         android:text="@string/button_folder" />
 
 </RelativeLayout>
