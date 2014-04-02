@@ -40,7 +40,7 @@ public class GetDocumentActivity extends Activity {
 	DownloadManager downloadManager;
 	ProgressDialog progress;
 	
-	String home = "http://http://142.103.25.29/UbicaUpload/";
+	String home = "http://142.103.25.29/UbicaUpload/";
 	
 	String message = "Download in Progress";
 		

@@ -34,7 +34,7 @@ public class GetFolderActivity extends Activity {
 	DownloadManager downloadManager;
 	ProgressDialog progress;
 	
-	String home = "http://http://142.103.25.29/UbicaUpload/";
+	String home = "http://142.103.25.29/UbicaUpload/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
