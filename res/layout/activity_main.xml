@@ -7,7 +7,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
-
+    
     <Button
         android:id="@+id/button1"
         android:layout_width="wrap_content"
@@ -26,6 +26,16 @@
         android:layout_alignLeft="@+id/button1"
         android:onClick="addFolder"
         android:text="@string/button_folder"
+        android:width="500dp" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button2"
+        android:layout_alignLeft="@+id/button2"
+        android:onClick="view"
+        android:text="@string/button_view"
         android:width="500dp" />
 
 </RelativeLayout>

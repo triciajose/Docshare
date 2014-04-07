@@ -6,9 +6,11 @@
     <string name="button_sync">Sync</string>
     <string name="edit_pass">Folder password</string>
     <string name="button_folder">Add Folder</string>
+    <string name="button_view">View Files</string>
     <string name="title_activity_get_document">GetDocumentActivity</string>
     <string name="title_activity_add_folder">AddFolderActivity</string>
     <string name="title_activity_get_folder">GetFolderActivity</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_display">Files</string>
 
 </resources>
