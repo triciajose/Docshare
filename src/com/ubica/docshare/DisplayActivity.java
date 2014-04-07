@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.app.Activity;
 import android.app.ListActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
@@ -24,10 +25,11 @@ public class DisplayActivity extends ListActivity {
 		setContentView(R.layout.activity_display);
 		// Show the Up button in the action bar.
 		setupActionBar();
-		
+		Log.d("Environment.getExternalStorageState() ", Environment.getExternalStorageState() );
 		// Read all files sorted into the values-array
 	    List values = new ArrayList();
-		File dir = new File(Environment.DIRECTORY_DOWNLOADS);
+	    File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+//		File dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS));
 	    if (!dir.canRead()) {
 	      setTitle(getTitle() + " (inaccessible)");
 	    }

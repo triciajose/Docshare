@@ -79,6 +79,7 @@ public class GetDocumentActivity extends Activity {
 					if (Environment.getExternalStorageState() == null) {
 			            File directory = new File(Environment.getDataDirectory()
 			                    + parts[0]);
+			            Log.d("path", directory.getAbsolutePath());
 			            
 			            // if no directory exists, create new directory
 			            if (!directory.exists()) {
@@ -113,13 +114,8 @@ public class GetDocumentActivity extends Activity {
 			e.printStackTrace();
 		}
 
-	    // Create the text view
-	    TextView textView = new TextView(this);
-	    textView.setTextSize(40);
-	    textView.setText(message);
-
-	    // Set the text view as the activity layout
-	    setContentView(textView);
+		Intent intent1 = new Intent(this, MainActivity.class);
+		startActivity(intent1);
 	}
                                                                                                                                    
 

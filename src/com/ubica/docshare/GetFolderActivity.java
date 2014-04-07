@@ -104,6 +104,8 @@ public class GetFolderActivity extends Activity {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+	    Intent intent1 = new Intent(this, MainActivity.class);
+		startActivity(intent1);
 
     }
 
@@ -143,12 +145,13 @@ public class GetFolderActivity extends Activity {
 						}
 						if (Environment.getExternalStorageState() == null) {
 				            File directory = new File(Environment.getDataDirectory()
-				                    + table);
+				                    + table);				            
 				            
 				            // if no directory exists, create new directory
 				            if (!directory.exists()) {
 				                directory.mkdir();
 				            }
+				            Log.d("path", directory.getAbsolutePath());
 						}
 
 						// get download service and enqueue file
