@@ -12,19 +12,25 @@ import android.app.ListActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
 import android.support.v4.app.NavUtils;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.os.Build;
 
 public class DisplayActivity extends ListActivity {
-
+	private String path;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_display);
 		// Show the Up button in the action bar.
 		setupActionBar();
+		path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString();
 		Log.d("Environment.getExternalStorageState() ", Environment.getExternalStorageState() );
 		// Read all files sorted into the values-array
 	    List values = new ArrayList();
@@ -83,5 +89,21 @@ public class DisplayActivity extends ListActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
+	
+	@Override
+	  protected void onListItemClick(ListView l, View v, int position, long id) {
+	    String filename = (String) getListAdapter().getItem(position);
+	    if (path.endsWith(File.separator)) {
+	      filename = path + filename;
+	    } else {
+	      filename = path + File.separator + filename;
+	    }
+	    if (new File(filename).isDirectory()) {
+	      Intent intent = new Intent(this, DisplayActivity.class);
+	      intent.putExtra("path", filename);
+	      startActivity(intent);
+	    } else {
+	      Toast.makeText(this, filename + " is not a directory", Toast.LENGTH_LONG).show();
+	    }
+	}
 }
