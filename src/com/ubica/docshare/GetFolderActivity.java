@@ -25,6 +25,7 @@ import com.ubica.docshare.DatabaseHandler;
 import com.ubica.docshare.JSONFunction;
 import com.ubica.docshare.MyFile;
 
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -63,8 +64,8 @@ public class GetFolderActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
     	
     	super.onCreate(savedInstanceState);
-		
-	    // Get the pass from the intent
+		 
+    	// Get the pass from the intent
 	    Intent intent = getIntent();
 	    String pass = intent.getStringExtra(AddFolderActivity.EXTRA_MESSAGE);
 	    
@@ -136,6 +137,7 @@ public class GetFolderActivity extends Activity {
 						String document = home + table + "/" + name;
 						Log.d("document:", document);
 						
+						
 						DownloadManager.Request request = new DownloadManager.Request(Uri.parse(document));
 						request.setTitle(name);
 						// 
@@ -144,8 +146,8 @@ public class GetFolderActivity extends Activity {
 						    request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
 						}
 						if (Environment.getExternalStorageState() == null) {
-				            File directory = new File(Environment.getDataDirectory()
-				                    + table);				            
+				            File directory = new File(Environment.getExternalStorageDirectory()
+				                    + "UbiCA/" + table);				            
 				            
 				            // if no directory exists, create new directory
 				            if (!directory.exists()) {
@@ -153,6 +155,7 @@ public class GetFolderActivity extends Activity {
 				            }
 				            Log.d("path", directory.getAbsolutePath());
 						}
+						request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS + "/UbiCA/" + table, name);
 
 						// get download service and enqueue file
 						DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);

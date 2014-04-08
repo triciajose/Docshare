@@ -77,8 +77,8 @@ public class GetDocumentActivity extends Activity {
 					    request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
 					}
 					if (Environment.getExternalStorageState() == null) {
-			            File directory = new File(Environment.getDataDirectory()
-			                    + parts[0]);
+			            File directory = new File(Environment.getExternalStorageDirectory()
+			                    + "UbiCA/" + parts[0]);
 			            Log.d("path", directory.getAbsolutePath());
 			            
 			            // if no directory exists, create new directory
@@ -86,6 +86,7 @@ public class GetDocumentActivity extends Activity {
 			                directory.mkdir();
 			            }
 					}
+					request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS + "/UbiCA" + parts[0], parts[1]);
 
 					// get download service and enqueue file
 					DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
