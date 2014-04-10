@@ -137,6 +137,12 @@ public class GetFolderActivity extends Activity {
 						String document = home + table + "/" + name;
 						Log.d("document:", document);
 						
+						File direct = new File(Environment.getExternalStorageDirectory()
+				                + "/UbiCA");
+						
+						if (!direct.exists()) {
+				            direct.mkdirs();
+				        }
 						
 						DownloadManager.Request request = new DownloadManager.Request(Uri.parse(document));
 						request.setTitle(name);
@@ -147,7 +153,7 @@ public class GetFolderActivity extends Activity {
 						}
 						if (Environment.getExternalStorageState() == null) {
 				            File directory = new File(Environment.getExternalStorageDirectory()
-				                    + "UbiCA/" + table);				            
+				                    + "/UbiCA/" + table);				            
 				            
 				            // if no directory exists, create new directory
 				            if (!directory.exists()) {
@@ -155,8 +161,10 @@ public class GetFolderActivity extends Activity {
 				            }
 				            Log.d("path", directory.getAbsolutePath());
 						}
-						request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS + "/UbiCA/" + table, name);
+//						request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "/UbiCA/" + table + "/" + name);
+						request.setDestinationInExternalPublicDir("/UbiCA/", table + "/" + name);
 
+						
 						// get download service and enqueue file
 						DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
 						manager.enqueue(request);

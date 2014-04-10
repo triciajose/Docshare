@@ -34,8 +34,8 @@ public class DisplayActivity extends ListActivity {
 		Log.d("Environment.getExternalStorageState() ", Environment.getExternalStorageState() );
 		// Read all files sorted into the values-array
 	    List values = new ArrayList();
-	    File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-//		File dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS));
+		File dir = Environment.getExternalStorageDirectory();
+//		File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
 	    if (!dir.canRead()) {
 	      setTitle(getTitle() + " (inaccessible)");
 	    }

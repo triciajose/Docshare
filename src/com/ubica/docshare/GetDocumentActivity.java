@@ -69,6 +69,13 @@ public class GetDocumentActivity extends Activity {
 				 String document = home + files.get(m);
 				 String[] parts = document.split("/");
 				 
+				 File direct = new File(Environment.getExternalStorageDirectory()
+			                + "/UbiCA");
+					
+					if (!direct.exists()) {
+			            direct.mkdirs();
+			        }
+				 
 				 DownloadManager.Request request = new DownloadManager.Request(Uri.parse(document));
 					request.setTitle(parts[1]);
 					// 
@@ -86,8 +93,10 @@ public class GetDocumentActivity extends Activity {
 			                directory.mkdir();
 			            }
 					}
-					request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS + "/UbiCA" + parts[0], parts[1]);
+//					request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "/UbiCA/" + parts[0] + "/" + parts[1]);
+					request.setDestinationInExternalPublicDir("/UbiCA/", parts[0] + "/" + parts[1]);
 
+					
 					// get download service and enqueue file
 					DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
 					manager.enqueue(request);
