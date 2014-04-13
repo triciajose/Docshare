@@ -48,6 +48,23 @@ public class DisplayActivity extends ListActivity {
 	      }
 	    }
 	    Collections.sort(values);
+	    
+	    File sdCardRoot = Environment.getExternalStorageDirectory();
+	    File yourDir = new File(sdCardRoot, "UbiCA");
+	    for (File f : yourDir.listFiles()) {
+	        if (f.isFile())
+
+
+	    {
+
+	        String name = f.getName();
+
+	                Log.i("file names", name);
+
+
+	    }
+
+	    }
 
 	    // Put the data into the list
 	    ArrayAdapter adapter = new ArrayAdapter(this,

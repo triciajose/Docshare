@@ -68,7 +68,7 @@ public class GetDocumentActivity extends Activity {
 			for(int m=0; m< files.size(); m++) {
 				 String document = home + files.get(m);
 				 String[] parts = document.split("/");
-				 
+				 String folder = "/UbiCA/" + parts[4];
 				 File direct = new File(Environment.getExternalStorageDirectory()
 			                + "/UbiCA");
 					
@@ -77,7 +77,7 @@ public class GetDocumentActivity extends Activity {
 			        }
 				 
 				 DownloadManager.Request request = new DownloadManager.Request(Uri.parse(document));
-					request.setTitle(parts[1]);
+					request.setTitle(parts[5]);
 					// 
 					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
 					    request.allowScanningByMediaScanner();
@@ -85,7 +85,7 @@ public class GetDocumentActivity extends Activity {
 					}
 					if (Environment.getExternalStorageState() == null) {
 			            File directory = new File(Environment.getExternalStorageDirectory()
-			                    + "UbiCA/" + parts[0]);
+			                    + "UbiCA/" + parts[4]);
 			            Log.d("path", directory.getAbsolutePath());
 			            
 			            // if no directory exists, create new directory
@@ -93,8 +93,7 @@ public class GetDocumentActivity extends Activity {
 			                directory.mkdir();
 			            }
 					}
-//					request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "/UbiCA/" + parts[0] + "/" + parts[1]);
-					request.setDestinationInExternalPublicDir("/UbiCA/", parts[0] + "/" + parts[1]);
+					request.setDestinationInExternalPublicDir("/UbiCA/" + parts[4] , parts[5]);
 
 					
 					// get download service and enqueue file
@@ -103,7 +102,7 @@ public class GetDocumentActivity extends Activity {
 				Date today = new Date();
 				Timestamp now = new Timestamp(today.getTime());
 				//	update local entries
-				MyFile newFile = new MyFile(parts[0], parts[1], now);
+				MyFile newFile = new MyFile(parts[4], parts[5], now);
 				database = new DatabaseOperations(this);
 			    database.open();
 				database.updateFile(newFile);
@@ -150,6 +149,8 @@ public class GetDocumentActivity extends Activity {
 			for(int m=0; m<jsonarray.length(); m++) {
 				JSONObject curr = jsonarray.getJSONObject(m);
 				JSONArray val = curr.optJSONArray(folders.get(i));
+				if(val != null) {
+				}
 				if(val != null) {
 					for(int j=0; j<val.length(); j++) {
 						String name = val.getJSONObject(j).getString("Name");

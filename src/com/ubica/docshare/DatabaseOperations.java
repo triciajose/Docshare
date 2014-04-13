@@ -35,7 +35,7 @@ public class DatabaseOperations {
 	    ContentValues values = new ContentValues();
 	    values.put(DatabaseHandler.KEY_NAME, file.getName()); // Name
 	    values.put(DatabaseHandler.KEY_FOLDER, file.getFolder()); // Folder
-	    values.put(DatabaseHandler.KEY_DATE, file.getDate().toString()); // Folder
+	    values.put(DatabaseHandler.KEY_DATE, file.getDate().toString()); // Date
 	    
 	    // Inserting Row
 	    database.insert(DatabaseHandler.TABLE_FILES, null, values);
@@ -85,6 +85,9 @@ public class DatabaseOperations {
 	public int updateFile(MyFile file) {
 	 
 	    ContentValues values = new ContentValues();
+	    
+	    values.put(DatabaseHandler.KEY_NAME, file.getName()); // Name
+	    values.put(DatabaseHandler.KEY_FOLDER, file.getFolder()); // Folder
 	    values.put(DatabaseHandler.KEY_DATE, file.getDate().toString());
 	 
 	    // updating row

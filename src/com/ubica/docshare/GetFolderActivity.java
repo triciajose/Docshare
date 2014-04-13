@@ -138,7 +138,7 @@ public class GetFolderActivity extends Activity {
 						Log.d("document:", document);
 						
 						File direct = new File(Environment.getExternalStorageDirectory()
-				                + "/UbiCA");
+				                + "UbiCA");
 						
 						if (!direct.exists()) {
 				            direct.mkdirs();
@@ -161,8 +161,8 @@ public class GetFolderActivity extends Activity {
 				            }
 				            Log.d("path", directory.getAbsolutePath());
 						}
-//						request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "/UbiCA/" + table + "/" + name);
-						request.setDestinationInExternalPublicDir("/UbiCA/", table + "/" + name);
+						request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, name);
+//						request.setDestinationInExternalPublicDir("/UbiCA/", table + "/" + name);
 
 						
 						// get download service and enqueue file
