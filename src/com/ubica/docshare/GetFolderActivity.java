@@ -161,8 +161,8 @@ public class GetFolderActivity extends Activity {
 				            }
 				            Log.d("path", directory.getAbsolutePath());
 						}
-						request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, name);
-//						request.setDestinationInExternalPublicDir("/UbiCA/", table + "/" + name);
+//						request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, name);
+						request.setDestinationInExternalPublicDir("/UbiCA/" + table , name);
 
 						
 						// get download service and enqueue file

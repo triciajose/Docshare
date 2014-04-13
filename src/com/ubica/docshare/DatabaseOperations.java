@@ -39,13 +39,12 @@ public class DatabaseOperations {
 	    
 	    // Inserting Row
 	    database.insert(DatabaseHandler.TABLE_FILES, null, values);
-	    database.close(); // Closing database connection
 	}
 	
 	public List<MyFile> getFiles() throws ParseException {
 		List<MyFile> files = new ArrayList<MyFile>();
 	    // Select All Query
-	    String selectQuery = "SELECT  * FROM " + DatabaseHandler.TABLE_FILES;
+	    String selectQuery = "SELECT * FROM " + DatabaseHandler.TABLE_FILES;
 	 
 	    Cursor cursor = database.rawQuery(selectQuery, null);
 	    
@@ -68,7 +67,7 @@ public class DatabaseOperations {
 	public List<String> getFolders(){
 		List<String> folders = new ArrayList<String>();
 	    // Select All Query
-	    String selectQuery = "SELECT " + DatabaseHandler.KEY_FOLDER + " FROM " + DatabaseHandler.TABLE_FILES;
+	    String selectQuery = "SELECT DISTINCT " + DatabaseHandler.KEY_FOLDER + " FROM " + DatabaseHandler.TABLE_FILES;
 	 
 	    Cursor cursor = database.rawQuery(selectQuery, null);
 	    // looping through all rows and adding to list
@@ -86,8 +85,8 @@ public class DatabaseOperations {
 	 
 	    ContentValues values = new ContentValues();
 	    
-	    values.put(DatabaseHandler.KEY_NAME, file.getName()); // Name
-	    values.put(DatabaseHandler.KEY_FOLDER, file.getFolder()); // Folder
+//	    values.put(DatabaseHandler.KEY_NAME, file.getName()); // Name
+//	    values.put(DatabaseHandler.KEY_FOLDER, file.getFolder()); // Folder
 	    values.put(DatabaseHandler.KEY_DATE, file.getDate().toString());
 	 
 	    // updating row
@@ -96,7 +95,7 @@ public class DatabaseOperations {
 	}
 
 	public MyFile getFile(String name) throws ParseException {
-		String selectQuery = "SELECT  * FROM " + DatabaseHandler.TABLE_FILES + " WHERE " + DatabaseHandler.KEY_NAME + " = ?";
+		String selectQuery = "SELECT DISTINCT * FROM " + DatabaseHandler.TABLE_FILES + " WHERE " + DatabaseHandler.KEY_NAME + " = ?";
 		Cursor cursor = database.rawQuery(selectQuery, new String[] {name});
 	    MyFile file = new MyFile();
 	    if (cursor.moveToFirst()) {

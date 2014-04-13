@@ -164,6 +164,13 @@ public class GetDocumentActivity extends Activity {
 						}
 						else {
 							download.add(folders.get(i) + "/" + name);
+//							 add entry to local db
+							Date today = new Date();
+							Log.d("Date:", today.toString());
+							Timestamp now = new Timestamp(today.getTime());
+							Log.d("Timestamp:", now.toString());
+							MyFile newFile = new MyFile(folders.get(i), name, now);
+							database.addFile(newFile);
 						}
 						
 					}
