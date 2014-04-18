@@ -134,11 +134,12 @@ public class GetFolderActivity extends Activity {
 				if (val != null) {
 					for(int j=0; j<val.length(); j++) {
 						String name = val.getJSONObject(j).getString("Name");
+						int version = val.getJSONObject(j).getInt("Version");
 						String document = home + table + "/" + name;
 						Log.d("document:", document);
 						
 						File direct = new File(Environment.getExternalStorageDirectory()
-				                + "UbiCA");
+				                + "/UbiCA");
 						
 						if (!direct.exists()) {
 				            direct.mkdirs();
@@ -170,11 +171,7 @@ public class GetFolderActivity extends Activity {
 						manager.enqueue(request);
 						
 //						 add entry to local db
-						Date today = new Date();
-						Log.d("Date:", today.toString());
-						Timestamp now = new Timestamp(today.getTime());
-						Log.d("Timestamp:", now.toString());
-						MyFile newFile = new MyFile(table, name, now);
+						MyFile newFile = new MyFile(table, name, version);
 						
 						database = new DatabaseOperations(this);
 					    database.open();

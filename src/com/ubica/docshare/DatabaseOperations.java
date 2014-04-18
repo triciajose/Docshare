@@ -16,7 +16,7 @@ public class DatabaseOperations {
 	
 	private DatabaseHandler dbhandler;
 	private SQLiteDatabase database;
-	private String[] MYFILE_TABLE_COLUMNS = { DatabaseHandler.KEY_FOLDER, DatabaseHandler.KEY_NAME, DatabaseHandler.KEY_DATE};
+	private String[] MYFILE_TABLE_COLUMNS = { DatabaseHandler.KEY_FOLDER, DatabaseHandler.KEY_NAME, DatabaseHandler.KEY_VERSION};
 
 	public DatabaseOperations(Context context) {
 		dbhandler = new DatabaseHandler(context);
@@ -35,7 +35,7 @@ public class DatabaseOperations {
 	    ContentValues values = new ContentValues();
 	    values.put(DatabaseHandler.KEY_NAME, file.getName()); // Name
 	    values.put(DatabaseHandler.KEY_FOLDER, file.getFolder()); // Folder
-	    values.put(DatabaseHandler.KEY_DATE, file.getDate().toString()); // Date
+	    values.put(DatabaseHandler.KEY_VERSION, file.getVersion()); // Date
 	    
 	    // Inserting Row
 	    database.insert(DatabaseHandler.TABLE_FILES, null, values);
@@ -54,8 +54,7 @@ public class DatabaseOperations {
 	            MyFile file = new MyFile();
 	            file.setFolder(cursor.getString(0));
 	            file.setName(cursor.getString(1));
-	            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-	            file.setDate(dateFormat.parse(cursor.getString(2)));
+	            file.setVersion(cursor.getInt(2));
 	            files.add(file);
 	        } while (cursor.moveToNext());
 	    }
@@ -87,7 +86,7 @@ public class DatabaseOperations {
 	    
 //	    values.put(DatabaseHandler.KEY_NAME, file.getName()); // Name
 //	    values.put(DatabaseHandler.KEY_FOLDER, file.getFolder()); // Folder
-	    values.put(DatabaseHandler.KEY_DATE, file.getDate().toString());
+	    values.put(DatabaseHandler.KEY_VERSION, file.getVersion());
 	 
 	    // updating row
 	    return database.update(DatabaseHandler.TABLE_FILES, values, DatabaseHandler.KEY_NAME + " = ?",
@@ -101,7 +100,7 @@ public class DatabaseOperations {
 	    if (cursor.moveToFirst()) {
 		    file.setFolder(cursor.getString(0));
 		    file.setName(cursor.getString(1));
-		    file.setDate(Timestamp.valueOf(cursor.getString(2)));
+            file.setVersion(cursor.getInt(2));
 	    }
 	    return file;
 	}

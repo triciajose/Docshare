@@ -85,8 +85,7 @@ public class GetDocumentActivity extends Activity {
 					}
 					if (Environment.getExternalStorageState() == null) {
 			            File directory = new File(Environment.getExternalStorageDirectory()
-			                    + "UbiCA/" + parts[4]);
-			            Log.d("path", directory.getAbsolutePath());
+			                    + "/UbiCA/" + parts[4]);
 			            
 			            // if no directory exists, create new directory
 			            if (!directory.exists()) {
@@ -99,10 +98,10 @@ public class GetDocumentActivity extends Activity {
 					// get download service and enqueue file
 					DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
 					manager.enqueue(request);
-				Date today = new Date();
-				Timestamp now = new Timestamp(today.getTime());
+				
 				//	update local entries
-				MyFile newFile = new MyFile(parts[4], parts[5], now);
+				int currVersion = database.getFile(parts[5]).getVersion();
+				MyFile newFile = new MyFile(parts[4], parts[5], (currVersion + 1));
 				database = new DatabaseOperations(this);
 			    database.open();
 				database.updateFile(newFile);
@@ -154,22 +153,19 @@ public class GetDocumentActivity extends Activity {
 				if(val != null) {
 					for(int j=0; j<val.length(); j++) {
 						String name = val.getJSONObject(j).getString("Name");
-						Timestamp date = Timestamp.valueOf(val.getJSONObject(j).getString("DateModified"));
+						int version = val.getJSONObject(j).getInt("Version");
 						// if it is old, then put into download array
 						if (database.getFile(name).getName() != null) {
 							MyFile file = database.getFile(name);
-							if (date.compareTo(file.getDate()) > 0 ) {
+							if (file.getVersion() < version ) {
 								download.add(folders.get(i) + "/" + name);
 							}
 						}
 						else {
 							download.add(folders.get(i) + "/" + name);
 //							 add entry to local db
-							Date today = new Date();
-							Log.d("Date:", today.toString());
-							Timestamp now = new Timestamp(today.getTime());
-							Log.d("Timestamp:", now.toString());
-							MyFile newFile = new MyFile(folders.get(i), name, now);
+							
+							MyFile newFile = new MyFile(folders.get(i), name, (version - 1));
 							database.addFile(newFile);
 						}
 						

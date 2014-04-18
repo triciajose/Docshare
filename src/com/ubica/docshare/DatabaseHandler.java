@@ -24,10 +24,10 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 	 // Files Table Columns names
     public static final String KEY_NAME = "name";
     public static final String KEY_FOLDER = "folder";
-    public static final String KEY_DATE = "dateModified";
+    public static final String KEY_VERSION = "version";
     public static final String CREATE_TABLE = "CREATE TABLE " + TABLE_FILES + " ( " + KEY_FOLDER + 
 			" TEXT NOT NULL, " + KEY_NAME + " TEXT NOT NULL UNIQUE PRIMARY KEY, " +
-			KEY_DATE + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL);";
+			KEY_VERSION + " INT DEFAULT 0 NOT NULL);";
 
 	
 	public DatabaseHandler(Context context) {

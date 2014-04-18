@@ -8,16 +8,16 @@ public class MyFile {
 //	private variables
 	String folder;
 	String name;
-	Timestamp dateModified;
+	int version;
 	
 	public MyFile() {
 		
 	}
 	
-	public MyFile(String folder, String name, Timestamp dateModified) {
+	public MyFile(String folder, String name, int version) {
 		this.folder = folder;
 		this.name = name;
-		this.dateModified = dateModified;
+		this.version = version;
 	}
 
 		
@@ -29,9 +29,10 @@ public class MyFile {
 		return this.name;
 	}
 	
-	public Timestamp getDate() {
-		return this.dateModified;
+	public int getVersion() {
+		return this.version;
 	}
+	
 	
 	public void setFolder(String folder) {
 		this.folder = folder;
@@ -42,7 +43,7 @@ public class MyFile {
 	}
 	
 	
-	public void setDate(Date date) {
-		this.dateModified = (Timestamp) date;
+	public void setVersion(int version) {
+		this.version = version;
 	}
 }
