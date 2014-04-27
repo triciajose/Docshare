@@ -8,24 +8,27 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".AddFolderActivity" >
 
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edit_pass"
+        android:layout_centerHorizontal="true"
+        android:onClick="isOkay"
+        android:text="@string/button_folder" />
+
     <EditText
         android:id="@+id/edit_pass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="111dp"
+        android:layout_marginTop="28dp"
         android:ems="10"
         android:hint="@string/edit_pass"
-        android:inputType="textPassword" />
+        android:inputType="textPassword" >
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/button_folder"
-    	android:onClick="isOkay" />
+        <requestFocus />
+    </EditText>
 
 </RelativeLayout>
