@@ -10,22 +10,24 @@ public class MyFile {
 	String name;
 	int version;
 	
+	// constructor	
 	public MyFile() {
 		
 	}
 	
+	// constructor	
 	public MyFile(String folder, String name, int version) {
 		this.folder = folder;
 		this.name = name;
 		this.version = version;
 	}
 
-		
+	// ------GETTERS -------
 	public String getFolder() {
 		return this.folder;
 	}
 	
-	public String getName() {
+		public String getName() {
 		return this.name;
 	}
 	
@@ -33,7 +35,7 @@ public class MyFile {
 		return this.version;
 	}
 	
-	
+	// -------SETTERS--------
 	public void setFolder(String folder) {
 		this.folder = folder;
 	}

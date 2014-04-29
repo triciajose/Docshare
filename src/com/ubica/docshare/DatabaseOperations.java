@@ -22,14 +22,18 @@ public class DatabaseOperations {
 		dbhandler = new DatabaseHandler(context);
 	}
 	
+//	open the database
 	public void open() {
 		database = dbhandler.getWritableDatabase();
 	}
 	
+//	close the database
 	public void close() {
 		dbhandler.close();
 	}
 	
+//	add file to the database
+//	params: file
 	public void addFile(MyFile file) {
 		 
 	    ContentValues values = new ContentValues();
@@ -41,6 +45,7 @@ public class DatabaseOperations {
 	    database.insert(DatabaseHandler.TABLE_FILES, null, values);
 	}
 	
+//	return all files in the database
 	public List<MyFile> getFiles() throws ParseException {
 		List<MyFile> files = new ArrayList<MyFile>();
 	    // Select All Query
@@ -63,6 +68,7 @@ public class DatabaseOperations {
 	    return files;
 	}
 	
+//	get all unique folders in database
 	public List<String> getFolders(){
 		List<String> folders = new ArrayList<String>();
 	    // Select All Query
@@ -80,6 +86,8 @@ public class DatabaseOperations {
 	    return folders;
 	}
 
+//	update file in database
+//	params: file
 	public int updateFile(MyFile file) {
 	 
 	    ContentValues values = new ContentValues();
@@ -93,6 +101,8 @@ public class DatabaseOperations {
 	            new String[] { String.valueOf(file.getName()) });
 	}
 
+//	get file in the database
+//	params: file name
 	public MyFile getFile(String name) throws ParseException {
 		String selectQuery = "SELECT DISTINCT * FROM " + DatabaseHandler.TABLE_FILES + " WHERE " + DatabaseHandler.KEY_NAME + " = ?";
 		Cursor cursor = database.rawQuery(selectQuery, new String[] {name});

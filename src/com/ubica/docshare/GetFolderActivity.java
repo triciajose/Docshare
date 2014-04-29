@@ -118,6 +118,8 @@ public class GetFolderActivity extends Activity {
 		return true;
 	}
     
+//	download all the files in a given folder
+//	params: folder name
     @SuppressLint("NewApi")
 	public void downloadFolder(String table) throws InterruptedException, ExecutionException, JSONException, IOException {
     	JSONArray jsonarray;
@@ -127,6 +129,7 @@ public class GetFolderActivity extends Activity {
 		JSONObject local = new JSONObject();
 		local.put(table, localarray);
 		
+		// download all files on server within the folder		
 		for(int i=0; i<jsonarray.length(); i++) {
 			try {
 				JSONObject entry = jsonarray.getJSONObject(i);
@@ -145,7 +148,8 @@ public class GetFolderActivity extends Activity {
 				            direct.mkdirs();
 				        }
 						
-						DownloadManager.Request request = new DownloadManager.Request(Uri.parse(document));
+						// initialize request
+						DownloadManager.Request request = new DownloadManager.Request(Uri.parse(document.replace(" ", "%20")));
 						request.setTitle(name);
 						// 
 						if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {

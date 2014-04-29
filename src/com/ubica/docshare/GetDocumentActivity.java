@@ -41,11 +41,13 @@ import android.preference.PreferenceManager;
 @SuppressLint("NewApi")
 public class GetDocumentActivity extends Activity {
 
+//	variables
 	SharedPreferences preferenceManager;
 	DownloadManager downloadManager;
 	ProgressDialog progress;
 	DatabaseOperations database;
 	
+//	constants
 	String home = "http://142.103.25.29/UbicaUpload/";
 	String message = "Download in Progress";
 		
@@ -63,8 +65,10 @@ public class GetDocumentActivity extends Activity {
 			JSONArray jsonarray; 
 			jsonarray = new JSONFunction().execute(home + "connect.php").get();
 			
+//			get list of files to download
 			List<String> files = this.parseJSON(jsonarray);
 			
+//			download each file
 			for(int m=0; m< files.size(); m++) {
 				 String document = home + files.get(m);
 				 String[] parts = document.split("/");
@@ -76,7 +80,8 @@ public class GetDocumentActivity extends Activity {
 			            direct.mkdirs();
 			        }
 				 
-				 DownloadManager.Request request = new DownloadManager.Request(Uri.parse(document));
+//				 make request to download
+				 DownloadManager.Request request = new DownloadManager.Request(Uri.parse(document.replace(" ", "%20")));
 					request.setTitle(parts[5]);
 					// 
 					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
@@ -92,6 +97,7 @@ public class GetDocumentActivity extends Activity {
 			                directory.mkdir();
 			            }
 					}
+					//set in UbiCA folder
 					request.setDestinationInExternalPublicDir("/UbiCA/" + parts[4] , parts[5]);
 
 					
@@ -121,7 +127,7 @@ public class GetDocumentActivity extends Activity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+//		 return to main screen
 		Intent intent1 = new Intent(this, MainActivity.class);
 		startActivity(intent1);
 	}
@@ -138,18 +144,21 @@ public class GetDocumentActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 	
+	// return list of new/updated files
+	// params: JSONArray	
 	public List<String> parseJSON(JSONArray jsonarray) throws JSONException, ParseException {
+		// open database
 		database = new DatabaseOperations(this);
 		database.open();
+		// get folders in database
 		List<String> folders = database.getFolders();
 		List<String> download = new ArrayList<String>();
 		
+		// check for differences in server
 		for(int i=0; i<folders.size(); i++) {
 			for(int m=0; m<jsonarray.length(); m++) {
 				JSONObject curr = jsonarray.getJSONObject(m);
 				JSONArray val = curr.optJSONArray(folders.get(i));
-				if(val != null) {
-				}
 				if(val != null) {
 					for(int j=0; j<val.length(); j++) {
 						String name = val.getJSONObject(j).getString("Name");
@@ -157,13 +166,15 @@ public class GetDocumentActivity extends Activity {
 						// if it is old, then put into download array
 						if (database.getFile(name).getName() != null) {
 							MyFile file = database.getFile(name);
+							// if its been updated it, add it to the list
 							if (file.getVersion() < version ) {
 								download.add(folders.get(i) + "/" + name);
 							}
 						}
+						// if file is completely new, add it to the list
 						else {
 							download.add(folders.get(i) + "/" + name);
-//							 add entry to local db
+							//add entry to local db
 							
 							MyFile newFile = new MyFile(folders.get(i), name, (version - 1));
 							database.addFile(newFile);
